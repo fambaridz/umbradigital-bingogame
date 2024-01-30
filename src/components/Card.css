@@ -1,0 +1,9 @@
+.BingoCardButton {
+    height: 3em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    flex: 1;
+    margin: 6px;
+}

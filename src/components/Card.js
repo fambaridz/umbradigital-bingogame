@@ -1,4 +1,5 @@
 import React from 'react';
+import './Card.css';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 

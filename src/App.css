@@ -20,14 +20,10 @@ html body {
   display: flex;
 }
 
-.BingoCardButton {
-  height: 4em !important;
+.Home {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 22px;
-  background-color: wheat;
-  color: black;
-  flex: 1;
-  margin: 6px;
+  justify-content: center;
+  height: 100vh;
 }
