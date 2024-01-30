@@ -1,4 +1,4 @@
-body {
+html body {
   background-color: #c89666;
 }
 
@@ -9,11 +9,25 @@ body {
   flex-direction: column;
 }
 
-.BingoCardContainer{
+.BingoCardContainer {
   background-color: rgb(243, 198, 113);
   width: 450px;
+  margin-top: 5em;
+  margin-right: 40em; /* Add a margin on the left side */
 }
 
-.Row{
+.Row {
   display: flex;
+}
+
+.BingoCardButton {
+  height: 4em !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  background-color: wheat;
+  color: black;
+  flex: 1;
+  margin: 6px;
 }

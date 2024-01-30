@@ -1,10 +1,10 @@
 .Header{
-    height: 2.6em;
+    height: 2.7em;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 29px;
     background-color: #2d545e;
-    color: black;
+    color: white;
     flex: 1;
 }
