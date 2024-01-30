@@ -6,12 +6,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .BingoCardContainer{
-  background-color: #2d545e;
+  background-color: rgb(243, 198, 113);
   width: 450px;
-  border-radius: 15px;
 }
 
 .Row{

@@ -7,7 +7,13 @@ const App = () => {
     <div className="App">
       <h1>Bingo Game</h1>
       <div className="BingoCardContainer">
-        <Header />
+        <div className="Row">
+          <Header symbol="B"/>
+          <Header symbol="I"/>
+          <Header symbol="N"/>
+          <Header symbol="G"/>
+          <Header symbol="O"/>
+        </div>
         <div className="Row">
           <Button symbol="1"/>
           <Button symbol="1"/>
