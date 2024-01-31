@@ -11,11 +11,14 @@ class Card extends Component {
     this.headerSymbol = ["B", "I", "N", "G", "O"];
     this.state = {
       bingoCard: this.createEmptyBingoCard(),
+      dataFetched: false,
     };
   }
 
   componentDidMount() {
-    this.fetchBingoCardData();
+    if (!this.state.dataFetched) {
+      this.fetchBingoCardData();
+    }
   }
 
   createEmptyBingoCard() {
@@ -30,11 +33,18 @@ class Card extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Received data from backend:', data);
-        this.setState({ bingoCard: data });
+  
+        // Check if the response contains an 'id' and 'numbers' property
+        if ('id' in data && 'numbers' in data) {
+          this.setState({ bingoCard: data.numbers, dataFetched: true });
+          // Now you can use the 'id' from data for any further operations
+        } else {
+          console.error('Invalid data format received from backend.');
+        }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error fetching data from backend:', error));
   }
-
+  
   render() {
     return (
       <div className="BingoCardContainer">
