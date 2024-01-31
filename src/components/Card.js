@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Card.css';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 
-export class Card extends React.Component {
+class Card extends Component {
   constructor(props) {
     super(props);
     this.rows = 5;
     this.cols = 5;
     this.headerSymbol = ["B", "I", "N", "G", "O"];
-    this.bingoCard = this.createBingoCard(this.rows, this.cols);
+    this.state = {
+      bingoCard: this.createEmptyBingoCard(),
+    };
   }
 
-  createBingoCard(rows, cols) {
-    return Array.from({ length: this.rows }, (_, rowIndex) =>
-        Array.from({ length: this.cols }, (_, colIndex) => rowIndex * cols + colIndex + 1)
-    );
+  componentDidMount() {
+    this.fetchBingoCardData();
+  }
+
+  createEmptyBingoCard() {
+    return Array.from({ length: this.rows }, () => Array.from({ length: this.cols }, () => 'FREE'));
+  }
+
+  fetchBingoCardData() {
+    // Fetch data from your backend API
+    fetch('http://localhost:8000/index.php', {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Received data from backend:', data);
+        this.setState({ bingoCard: data });
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   render() {
@@ -23,17 +40,25 @@ export class Card extends React.Component {
       <div className="BingoCardContainer">
         <div className='Row'>
           {this.headerSymbol.map((symbol, index) => (
-              <Header key={index} symbol={symbol} />
+            <Header key={index} symbol={symbol} />
           ))}
         </div>
-          {this.bingoCard.map((row, rowIndex) => (
-            <div key={rowIndex} className="Row">
-              {row.map(number => (
-                <Button className='BingoCardButton' variant="dark" key={number}>{number.toString()}</Button>
-              ))}
-            </div>
-          ))}
+        {this.state.bingoCard.map((row, rowIndex) => (
+          <div key={rowIndex} className="Row">
+            {this.headerSymbol.map((symbol, colIndex) => (
+              <Button
+                className='BingoCardButton'
+                variant="dark"
+                key={colIndex}
+              >
+                {row[colIndex] === 'FREE' ? 'FREE' : row[colIndex].toString()}
+              </Button>
+            ))}
+          </div>
+        ))}
       </div>
     );
-  }
+  }    
 }
+
+export default Card;
