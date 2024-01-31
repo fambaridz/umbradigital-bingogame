@@ -1,0 +1,30 @@
+.CardCallerRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em; /* Adjust the margin as needed */
+}
+
+.BingoCardContainer {
+    background-color: rgb(243, 198, 113);
+    width: 400px; /* Adjust the width based on your design */
+    margin-top: 5em;
+    margin-right: 20em;
+}
+
+.CallerContainer {
+    background-color: rgb(243, 198, 113);
+    width: 300px;
+    margin-top: 5em;
+    margin-right: 3em;
+    border-radius: 5px;
+}
+
+.Game {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.ButtonContainer {
+    margin-top: 1em;
+}

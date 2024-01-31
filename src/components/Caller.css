@@ -1,0 +1,6 @@
+.CallerContainer {
+    background-color: rgb(243, 198, 113);
+    width: 40px;
+    margin-top: 5em;
+    margin-right: 40em; /* Add a margin on the left side */
+}
