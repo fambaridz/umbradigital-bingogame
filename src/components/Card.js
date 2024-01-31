@@ -25,14 +25,14 @@ class Card extends Component {
   fetchBingoCardData() {
     // Fetch data from your backend API
     fetch('http://localhost:8000/index.php', {
-        method: 'POST',
+      method: 'POST',
     })
-    .then(response => response.json())
-    .then(data => {
+      .then(response => response.json())
+      .then(data => {
         console.log('Received data from backend:', data);
         this.setState({ bingoCard: data });
-    })
-    .catch(error => console.error('Error:', error));
+      })
+      .catch(error => console.error('Error:', error));
   }
 
   render() {
@@ -49,16 +49,16 @@ class Card extends Component {
               <Button
                 className='BingoCardButton'
                 variant="dark"
-                key={colIndex}
+                key={`${rowIndex}-${colIndex}`}
               >
-                {row[colIndex] === 'FREE' ? 'FREE' : row[colIndex].toString()}
+                {row[symbol] === 'FREE' ? 'FREE' : (row[symbol] ? row[symbol].toString() : '')}
               </Button>
             ))}
           </div>
         ))}
       </div>
     );
-  }    
+  }  
 }
 
 export default Card;
