@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css"
 
-const Input = ({ symbol }) => {
+const Header = ({ symbol }) => {
   return (
     <div className="Header">
       <h2>{symbol}</h2>
@@ -9,4 +9,4 @@ const Input = ({ symbol }) => {
   );
 };
 
-export default Input;
+export default Header;

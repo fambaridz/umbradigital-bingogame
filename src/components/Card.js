@@ -24,7 +24,7 @@ class Card extends Component {
 
   fetchBingoCardData() {
     // Fetch data from your backend API
-    fetch('http://localhost:8000/index.php', {
+    fetch('http://localhost:8000/bingoCard.php', {
       method: 'POST',
     })
       .then(response => response.json())
