@@ -12,7 +12,6 @@ const Home = () => {
 
     setTimeout(() => {
       setLoading(false);
-
       navigate('/play');
     }, 1400);
   };
