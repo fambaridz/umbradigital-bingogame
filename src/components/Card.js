@@ -26,7 +26,6 @@ class Card extends Component {
   }
 
   fetchBingoCardData() {
-    // Fetch data from your backend API
     fetch('http://localhost:8000/bingoCard.php', {
       method: 'POST',
     })
@@ -34,10 +33,8 @@ class Card extends Component {
       .then(data => {
         console.log('Received data from backend:', data);
   
-        // Check if the response contains an 'id' and 'numbers' property
         if ('id' in data && 'numbers' in data) {
           this.setState({ bingoCard: data.numbers, dataFetched: true });
-          // Now you can use the 'id' from data for any further operations
         } else {
           console.error('Invalid data format received from backend.');
         }

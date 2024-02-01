@@ -19,15 +19,17 @@ class Caller extends Component {
   }
 
   fetchAllCalls = () => {
+    console.log('Fetching calls...');
     fetch('http://localhost:8000/caller.php', {
       method: 'GET',
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ calls: data });
+        console.log('Received data from backend:', data);
+        this.setState({ calls: data.numbers });
       })
       .catch(error => console.error("Error fetching calls:", error));
-  };
+  };  
 
   handleNextNumber = () => {
     const { calls, currentIndex, displayedNumbers } = this.state;
