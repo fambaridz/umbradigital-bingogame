@@ -26,10 +26,36 @@ class Caller extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Received data from backend:', data);
-        this.setState({ calls: data.numbers });
+        this.setState({ calls: data.numbers }, () => {
+          this.sendDisplayedNumbers();
+        });
       })
       .catch(error => console.error("Error fetching calls:", error));
-  };  
+  };
+
+  sendDisplayedNumbers = () => {
+    const { calls, currentIndex } = this.state;
+
+    if (currentIndex < calls.length) {
+      const currentCall = calls[currentIndex];
+      const displayedNumber = `${currentCall.letter}${currentCall.number}`;
+
+      console.log('Sending displayed number:', displayedNumber);
+
+      fetch('http://localhost:8000/sendNumber.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ displayedNumber }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Number sent to backend:', data);
+        })
+        .catch(error => console.error("Error sending number:", error));
+    }
+  };
 
   handleNextNumber = () => {
     const { calls, currentIndex, displayedNumbers } = this.state;
@@ -38,10 +64,16 @@ class Caller extends Component {
       const nextCall = calls[currentIndex];
 
       if (!displayedNumbers.includes(`${nextCall.letter}${nextCall.number}`)) {
-        this.setState(prevState => ({
-          currentIndex: prevState.currentIndex + 1,
-          displayedNumbers: [...prevState.displayedNumbers, `${nextCall.letter}${nextCall.number}`],
-        }));
+        this.setState(
+          prevState => ({
+            currentIndex: prevState.currentIndex + 1,
+            displayedNumbers: [
+              ...prevState.displayedNumbers,
+              `${nextCall.letter}${nextCall.number}`,
+            ],
+          }),
+          this.sendDisplayedNumbers
+        );
       }
     }
   };
@@ -56,10 +88,13 @@ class Caller extends Component {
         {currentIndex < calls.length && (
           <div className="numberContainer">
             <div>
-              {calls[currentIndex].letter}{calls[currentIndex].number}
+              {calls[currentIndex].letter}
+              {calls[currentIndex].number}
             </div>
             <h5>Numbers Remaining: {remainingNumbers}</h5>
-            <Button onClick={this.handleNextNumber} variant="light">Next Number</Button>
+            <Button onClick={this.handleNextNumber} variant="light">
+              Next Number
+            </Button>
           </div>
         )}
       </div>

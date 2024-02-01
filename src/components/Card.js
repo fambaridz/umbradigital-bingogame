@@ -13,6 +13,7 @@ class Card extends Component {
       bingoCard: this.createEmptyBingoCard(),
       dataFetched: false,
       clickedButtons: [],
+      cardId: null,
     };
   }
 
@@ -35,7 +36,7 @@ class Card extends Component {
         console.log('Received data from backend:', data);
 
         if ('id' in data && 'numbers' in data) {
-          this.setState({ bingoCard: data.numbers, dataFetched: true });
+          this.setState({ bingoCard: data.numbers, dataFetched: true, cardId: data.id });
         } else {
           console.error('Invalid data format received from backend.');
         }
@@ -44,18 +45,33 @@ class Card extends Component {
   }
 
   handleButtonClick(rowIndex, colIndex) {
-    const clickedButtons = [...this.state.clickedButtons];
     const buttonKey = `${rowIndex}-${colIndex}`;
-
-    if (clickedButtons.includes(buttonKey)) {
-      // Button is already clicked, remove it from the clickedButtons array
-      clickedButtons.splice(clickedButtons.indexOf(buttonKey), 1);
-    } else {
-      // Button is not clicked, add it to the clickedButtons array
-      clickedButtons.push(buttonKey);
+  
+    if (!this.state.clickedButtons.includes(buttonKey)) {
+      this.setState(prevState => ({
+        clickedButtons: [...prevState.clickedButtons, buttonKey],
+      }));
+  
+      const requestData = {
+        rowIndex,
+        colIndex,
+        cardId: this.state.cardId,
+      };
+      console.log('Data being sent to the backend:', requestData);
+  
+      fetch('http://localhost:8000/buttonClicked.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Received response from backend:', data);
+        })
+        .catch(error => console.error('Error sending data to backend:', error));
     }
-
-    this.setState({ clickedButtons });
   }
 
   isButtonClicked(rowIndex, colIndex) {
