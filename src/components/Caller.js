@@ -42,7 +42,7 @@ class Caller extends Component {
 
       console.log('Sending displayed number:', displayedNumber);
 
-      fetch('http://localhost:8000/sendNumber.php', {
+      fetch('http://localhost:8000/randomNumber.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ class Caller extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Number sent to backend:', data);
+          console.log('Received response from backend:', data);
         })
         .catch(error => console.error("Error sending number:", error));
     }
