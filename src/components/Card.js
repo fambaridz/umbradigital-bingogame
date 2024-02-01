@@ -27,7 +27,7 @@ class Card extends Component {
 
   fetchBingoCardData() {
     fetch('http://localhost:8000/bingoCard.php', {
-      method: 'POST',
+      method: 'GET',
     })
       .then(response => response.json())
       .then(data => {
