@@ -42,7 +42,7 @@ class Caller extends Component {
 
       console.log('Sending displayed number:', displayedNumber);
 
-      fetch('http://localhost:8000/randomNumber.php', {
+      fetch('http://localhost:8000/receiveData.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

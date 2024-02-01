@@ -59,7 +59,7 @@ class Card extends Component {
       };
       console.log('Data being sent to the backend:', requestData);
   
-      fetch('http://localhost:8000/buttonClicked.php', {
+      fetch('http://localhost:8000/receiveData.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
